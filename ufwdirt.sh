@@ -60,6 +60,12 @@ allow_outgoing() {
     sudo ufw default allow outgoing
 }
 
+# Function to set default policy to deny
+set_policy_deny() {
+    sudo ufw default deny incoming
+    sudo ufw default deny outgoing
+}
+
 # Main program loop
 while true; do
     echo "Please select an option:"
@@ -71,7 +77,8 @@ while true; do
     echo "6. Show all currently applied rules within ufw"
     echo "7. Restrict incoming connections on a service to a specific IP"
     echo "8. Allow outgoing connections only"
-    echo "9. Exit"
+    echo "9. Set default policy to deny"
+    echo "10. Exit"
     read choice
     case $choice in
         1) add_rule;;
@@ -82,7 +89,8 @@ while true; do
         6) show_rules;;
         7) restrict_incoming;;
         8) allow_outgoing;;
-        9) exit;;
+        9) set_policy_deny;;
+        10) exit;;
         *) echo "Invalid choice";;
     esac
 done
